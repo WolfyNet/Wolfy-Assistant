@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Wolfy Assistant",
+  "version": "0.1.0",
+  "description": "Tracker de rôle et remplacement visuel pour Wolfy.",
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.wolfy.net/*"],
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["eyes2.svg", "icon.png"],
+      "matches": ["*://*.wolfy.net/*"]
+    }
+  ]
+}

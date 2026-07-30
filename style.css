@@ -1,0 +1,431 @@
+#wr-root {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999999;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  color: #f4f4fb;
+}
+
+#wr-root *, #wr-root *::before, #wr-root *::after {
+  box-sizing: border-box;
+}
+
+
+.wr-toggle {
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6d5bd0, #a06be0);
+  box-shadow: 0 8px 24px rgba(109, 91, 208, 0.4);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.wr-toggle:hover {
+  transform: scale(1.05);
+}
+
+
+.wr-panel {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 300px;
+  background: rgba(13, 17, 33, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 181, 253, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  flex-direction: column;
+}
+
+#wr-root.is-open .wr-panel {
+  display: flex;
+}
+
+.wr-header {
+  padding: 16px;
+  background: rgba(109, 91, 208, 0.2);
+  border-bottom: 1px solid rgba(196, 181, 253, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wr-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.wr-refresh {
+  background: none;
+  border: none;
+  color: #a06be0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.wr-refresh:hover {
+  color: #c4b5fd;
+}
+
+
+.wr-players {
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.wr-players::-webkit-scrollbar {
+  width: 6px;
+}
+.wr-players::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.wr-player-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.wr-player-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.wr-player-item input[type="checkbox"] {
+  margin-right: 12px;
+  accent-color: #a06be0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.wr-player-item.is-excluded span {
+  text-decoration: line-through;
+  color: #6b7394;
+}
+
+
+.wr-action-area {
+  padding: 16px;
+  border-top: 1px solid rgba(196, 181, 253, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wr-draw-btn {
+  width: 100%;
+  align-items: center;
+  padding: 10px 0;
+  display: flex;
+  border: none;
+  justify-content: center;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6d5bd0, #a06be0);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.wr-draw-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.wr-draw-btn:disabled {
+  background: #3a3f58;
+  color: #6b7394;
+  cursor: not-allowed;
+}
+
+.wr-result {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #7fd4a8; 
+  text-align: center;
+  word-break: break-all;
+}
+
+.wr-empty-state {
+  padding: 20px;
+  text-align: center;
+  color: #6b7394;
+  font-size: 13px;
+}
+
+/* --- Bouton Flottant Déplaçable --- */
+#wolfy-assistant-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 55px;
+    height: 55px;
+    background-color: #1a1c23;
+    border: 2px solid #3b4050;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transition: transform 0.1s;
+}
+
+#wolfy-assistant-btn:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+#wolfy-assistant-btn img {
+    width: 70%;
+    height: 70%;
+    pointer-events: none; /* Empêche le bug de drag sur l'image elle-même */
+}
+
+/* --- Panneau Couteau Suisse --- */
+#wolfy-panel {
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    width: 320px;
+    background: #1a1c23;
+    color: #e2e8f0;
+    border: 2px solid #3b4050;
+    border-radius: 12px;
+    padding: 20px;
+    z-index: 999999;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: none;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+#wolfy-panel h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 1px solid #3b4050;
+    padding-bottom: 8px;
+}
+
+/* Tracker de rôles */
+.tracker-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #232630;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.tracker-row .player-name {
+    font-weight: bold;
+    font-size: 14px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tracker-row select {
+    background: #1a1c23;
+    color: white;
+    border: 1px solid #4a5568;
+    border-radius: 4px;
+    padding: 4px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Section Votes */
+.vote-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.vote-inputs select {
+    width: 42%;
+    background: #232630;
+    color: white;
+    border: 1px solid #4a5568;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+.wolfy-btn {
+    background: #4a5568;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.wolfy-btn:hover { background: #2d3748; }
+.wolfy-btn.danger { background: #e53e3e; }
+.wolfy-btn.danger:hover { background: #c53030; }
+
+#vote-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+    font-size: 13px;
+}
+
+#vote-list li {
+    background: #232630;
+    margin-bottom: 5px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    border-left: 3px solid #e53e3e;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────────────────── */
+.wr-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(196, 181, 253, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.wr-tab {
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  background: none;
+  color: #6b7394;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.wr-tab:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #c4b5fd;
+}
+
+.wr-tab.is-active {
+  color: #a06be0;
+  background: rgba(160, 107, 224, 0.1);
+  border-bottom: 2px solid #a06be0;
+}
+
+/* ── Tab panels ─────────────────────────────────────────────────────────── */
+.wr-tab-panel {
+  display: block;
+}
+
+/* ── Toggle drag ────────────────────────────────────────────────────────── */
+.wr-toggle {
+  cursor: grab;
+  user-select: none;
+}
+.wr-toggle:active { cursor: grabbing; }
+
+/* ── Death log ──────────────────────────────────────────────────────────── */
+.wr-death-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.wr-death-list::-webkit-scrollbar { width: 5px; }
+.wr-death-list::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+
+.wr-death-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-bottom: 1px solid rgba(196, 181, 253, 0.06);
+  animation: wr-slide-in 0.25s ease var(--delay, 0ms) both;
+}
+
+.wr-death-row:last-child { border-bottom: none; }
+
+@keyframes wr-slide-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.wr-death-skull {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.wr-death-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wr-death-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 20px;
+  border: 1px solid;
+  flex-shrink: 0;
+}
+
+.wr-death-time {
+  font-size: 10px;
+  color: #6b7394;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Clear deaths button */
+.wr-clear-deaths-btn {
+  width: 100%;
+  padding: 9px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 80, 80, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 80, 80, 0.08);
+  color: #ff7070;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.wr-clear-deaths-btn:hover { background: rgba(255, 80, 80, 0.18); }
