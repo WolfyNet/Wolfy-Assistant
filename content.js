@@ -318,7 +318,7 @@
         </div>
       </div>
 
-      <button class="wr-toggle" title="Ouvrir/Fermer Wolfy Tools">🎲</button>
+      <button class="wr-toggle" title="Ouvrir/Fermer Wolfy Tools">📜</button>
     `;
 
     document.body.appendChild(root);
