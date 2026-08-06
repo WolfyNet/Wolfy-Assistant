@@ -368,3 +368,82 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+.wr-clear-deaths-btn {
+  width: 100%;
+  padding: 8px 0;
+  border: 1px solid rgba(255, 80, 80, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 80, 80, 0.08);
+  color: #ff7070;
+  font-weight: 600;
+  cursor: pointer;
+  
+  /* Flexbox pour aligner l'icône et le texte verticalement */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  line-height: 1 !important;
+}
+
+/* Style visuel discret pour la cible Auto-Ninja */
+[class*="character"].wr-ninja-targeted {
+  outline: 2px solid #eab308 !important; /* Bordure jaune/dorée fine */
+  outline-offset: 2px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(234, 179, 8, 0.4) !important;
+  transition: all 0.2s ease;
+}
+
+/* Badge discret au-dessus de la carte */
+[class*="character"].wr-ninja-targeted::after {
+  content: '🎯';
+  position: absolute;
+  top: -12px;
+  right: -4px;
+  background: #eab308;
+  color: #000;
+  font-size: 10px;
+  line-height: 1;
+  padding: 3px 4px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  z-index: 99;
+  pointer-events: none;
+}
+
+/* LEADERBOARD DETAILS EXTENSION */
+      .wr-history-extension {
+        width: 100%;
+        background: rgba(15, 13, 25, 0.6);
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .wr-history-toggle {
+        width: 100%; background: transparent; border: none; color: #a78bfa;
+        padding: 6px 0; font-size: 10px; font-weight: 700; text-transform: uppercase;
+        cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+        transition: all 0.2s;
+      }
+      .wr-history-toggle:hover { background: rgba(167, 139, 250, 0.1); color: #c4b5fd; }
+      .wr-history-toggle svg { transition: transform 0.2s; }
+      .wr-history-toggle.is-open svg { transform: rotate(45deg); }
+      
+      .wr-history-content {
+        display: none; flex-direction: column; padding: 10px 16px;
+        background: rgba(0, 0, 0, 0.25); border-top: 1px solid rgba(255, 255, 255, 0.03);
+      }
+      .wr-hc-grid { display: flex; gap: 8px; margin-bottom: 8px; }
+      .wr-hc-stat {
+        flex: 1; background: rgba(255, 255, 255, 0.04); padding: 6px; border-radius: 6px;
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.03); font-size: 12px;
+      }
+      .wr-hc-stat span { font-size: 9px; color: #94a3b8; margin-bottom: 2px; }
+      .wr-roles-container {
+        display: flex; flex-wrap: wrap; gap: 4px; padding-top: 8px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.1);
+      }
+
+
+      
